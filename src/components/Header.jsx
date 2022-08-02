@@ -118,7 +118,7 @@ const Header = ({ type }) => {
 										onChange={(item) => setDate([item.selection])}
 										moveRangeOnFirstSelection={false}
 										ranges={date}
-										className="absolute top-12"
+										className="absolute top-12 z-20"
 									/>
 								)}
 							</div>
@@ -131,7 +131,7 @@ const Header = ({ type }) => {
 									{`${options.adult} adult . ${options.children} children . ${options.rooms} room`}
 								</span>
 								{openOptions && (
-									<div className="absolute top-[50px] bg-white text-gray-600 rounded-[5px] shadow-2xl">
+									<div className="absolute top-[50px] bg-white text-gray-600 rounded-[5px] shadow-2xl z-20">
 										<div className="w-48 flex justify-between m-2.5">
 											<span className="optiontext">Adult</span>
 											<div className="flex items-center gap-2 text-[16px] text-black">
