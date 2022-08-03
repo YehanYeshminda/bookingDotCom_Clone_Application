@@ -1,6 +1,7 @@
 import FeaturedCities from '../../components/FeaturedCities';
 import FeaturedHotels from '../../components/FeaturedHotels';
 import Header from '../../components/Header';
+import MailList from '../../components/MailList';
 import Navbar from '../../components/Navbar';
 import PropertyList from '../../components/PropertyList';
 
@@ -17,6 +18,7 @@ const Home = () => {
 
 				<h1 className="w-5xl text-2xl font-medium">Home Guests Love!</h1>
 				<FeaturedHotels />
+				<MailList />
 			</div>
 		</div>
 	);
