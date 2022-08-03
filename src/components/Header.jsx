@@ -15,9 +15,11 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ type }) => {
 	const [openDate, setOpenDate] = useState(false);
+	const [destination, setDestination] = useState('');
 
 	const [date, setDate] = useState([
 		{
@@ -28,6 +30,7 @@ const Header = ({ type }) => {
 	]);
 
 	const [openOptions, setOpenOptions] = useState(false);
+	const navigate = useNavigate();
 
 	const [options, setOptions] = useState({
 		adult: 1,
@@ -42,6 +45,11 @@ const Header = ({ type }) => {
 				[name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
 			};
 		});
+	};
+
+	// in order to send destination date and options to the /hotels page
+	const handleSearch = () => {
+		navigate('/hotels', { state: { destination, date, options } });
 	};
 
 	return (
@@ -94,6 +102,9 @@ const Header = ({ type }) => {
 									type="text"
 									placeholder="where are you going?"
 									className="border-none outline-none text-black"
+									/* -------------------------------------------------------------------------- */
+									// setting the destination to send
+									onChange={(e) => setDestination(e.target.value)}
 								/>
 							</div>
 							<div className="flex items-center gap-[10px] ">
@@ -193,7 +204,12 @@ const Header = ({ type }) => {
 								)}
 							</div>
 							<div className="flex items-center gap-[10px] ">
-								<button className="bg-blue-500 text-white font-semibold border-none py-[5px] px-2.5 cursor-pointer rounded">
+								<button
+									/* -------------------------------------------------------------------------- */
+									// handline the search and sending in the search request
+									onClick={handleSearch}
+									className="bg-blue-500 text-white font-semibold border-none py-[5px] px-2.5 cursor-pointer rounded"
+								>
 									Search
 								</button>
 							</div>
