@@ -16,6 +16,9 @@ module.exports = {
 				200: '200px',
 				425: '425px',
 			},
+			fontSize: {
+				h1: '2rem',
+			},
 		},
 	},
 	plugins: [],
