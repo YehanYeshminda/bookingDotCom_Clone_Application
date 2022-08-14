@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
+import SearchItem from '../../components/SearchItem';
 
 const List = () => {
 	const location = useLocation();
@@ -20,7 +21,7 @@ const List = () => {
 
 			<div className="flex mt-5 justify-center">
 				<div className="w-full max-w-5xl flex gap-5">
-					<div className="flex-1 bg-yellow-300 p-2.5 rounded sticky">
+					<div className="flex-1 bg-yellow-300 p-2.5 rounded sticky top-3 h-425">
 						<h1 className="text-xl font-semibold text-gray-500 mb-2.5">
 							Search
 						</h1>
@@ -99,7 +100,16 @@ const List = () => {
 							Search
 						</button>
 					</div>
-					<div className="flex-[3]"></div>
+					<div className="flex-[3]">
+						<SearchItem />
+						<SearchItem />
+						<SearchItem />
+						<SearchItem />
+						<SearchItem />
+						<SearchItem />
+						<SearchItem />
+						<SearchItem />
+					</div>
 				</div>
 			</div>
 		</div>
