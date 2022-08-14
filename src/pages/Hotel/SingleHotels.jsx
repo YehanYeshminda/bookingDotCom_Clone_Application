@@ -4,7 +4,12 @@ import Header from '../../components/Header';
 import MailList from '../../components/MailList';
 import Footer from '../../components/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import {
+	faCircleArrowLeft,
+	faCircleArrowRight,
+	faCircleXmark,
+	faLocationDot,
+} from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 const SingleHotels = () => {
@@ -31,10 +36,21 @@ const SingleHotels = () => {
 			src: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707389.jpg?k=52156673f9eb6d5d99d3eed9386491a0465ce6f3b995f005ac71abc192dd5827&o=&hp=1',
 		},
 	];
-
 	const handleOpen = (i) => {
 		setSlideNumber(i);
 		setOpen(true);
+	};
+
+	const handleMove = (direction) => {
+		let newSlideNumber;
+
+		if (direction === 'l') {
+			newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+		} else {
+			newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+		}
+
+		setSlideNumber(newSlideNumber);
 	};
 
 	return (
@@ -42,6 +58,32 @@ const SingleHotels = () => {
 			<Navbar />
 			<Header type="list" />
 			<div className="flex flex-col items-center mt-5">
+				{open && (
+					<div className="sticky top-0 left-10 right-10 w-full h-[100vh] bg-trasparentBlack z-50 flex items-center">
+						<FontAwesomeIcon
+							icon={faCircleXmark}
+							className="absolute top-5 right-5 text-3xl text-gray-400 cursor-pointer"
+							onClick={() => setOpen(false)}
+						/>
+						<FontAwesomeIcon
+							icon={faCircleArrowLeft}
+							className="m-5 text-5xl text-gray-500 cursor-pointer"
+							onClick={() => handleMove('l')}
+						/>
+						<div className="w-full h-full flex justify-center items-center">
+							<img
+								src={photos[slideNumber].src}
+								alt=""
+								className="w-3/4 h-[80vh]"
+							/>
+						</div>
+						<FontAwesomeIcon
+							icon={faCircleArrowRight}
+							className="m-5 text-5xl text-gray-500 cursor-pointer"
+							onClick={() => handleMove('r')}
+						/>
+					</div>
+				)}
 				<div className="w-full max-w-5xl flex flex-col gap-2.5 relative">
 					<button
 						className="absolute top-2.5 right-0 pr-2.5 pl-2.5 pt-2.5 pb-2.5 bg-blue-600 text-white font-semibold rounded-xs border-none cursor-pointer"

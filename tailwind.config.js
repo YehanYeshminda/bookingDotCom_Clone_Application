@@ -19,6 +19,9 @@ module.exports = {
 			fontSize: {
 				h1: '2rem',
 			},
+			backgroundColor: {
+				trasparentBlack: 'rgba(0, 0, 0, 0.613)',
+			},
 		},
 	},
 	plugins: [],
