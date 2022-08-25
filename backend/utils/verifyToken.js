@@ -28,7 +28,7 @@ export const verifyCheckUser = (req, res, next) => {
 		if (req.user.id === req.params.id || req.user.isAdmin) {
 			next();
 		} else {
-			return next(createError(403, 'Your not autherized and not the user!'));
+			return next(createError(403, 'You are not authorized!'));
 		}
 	});
 };
@@ -40,7 +40,7 @@ export const verifyCheckAdmin = (req, res, next) => {
 		if (req.user.isAdmin) {
 			next();
 		} else {
-			return next(createError(403, 'Your not autherized and not the admin!'));
+			return next(createError(403, 'You are not authorized!'));
 		}
 	});
 };
