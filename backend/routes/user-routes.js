@@ -5,10 +5,16 @@ import {
 	getUniqueUser,
 	updateUser,
 } from '../controllers/user-controller.js';
+import { verifyToken } from '../utils/verifyToken.js';
 
 const userRouter = express.Router();
 
 // since we already have register and login inside of the auth we dont declare them here
+
+// authentication route using JWT Cookies and this will execute once the next in the verify token is executed only
+userRouter.get('/checkAuthentication', verifyToken, (req, res, next) => {
+	res.send('Hello user you are athenticated and Logged in!');
+});
 
 // update request to a existing hotel
 userRouter.put('/:id', updateUser);
