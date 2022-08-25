@@ -5,6 +5,7 @@ import authRouter from './routes/auth-route.js';
 import hotelRouter from './routes/hotel-routes.js';
 import roomRouter from './routes/room-routes.js';
 import userRouter from './routes/user-routes.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -24,6 +25,7 @@ mongoose.connection.on('disconnected', () => {
 });
 
 // middlewares for the files to function
+app.use(cookieParser()); // used to pass cookies with rhe use of jwt
 app.use(express.json());
 
 // when ever we use this end point this will then use this end point
