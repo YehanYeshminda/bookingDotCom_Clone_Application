@@ -48,7 +48,7 @@ export const getUniqueHotel = async (req, res, next) => {
 	}
 };
 
-// get all hotels
+// get all hotels using queries
 export const getAllHotels = async (req, res, next) => {
 	const { min, max, ...others } = req.query;
 

@@ -21,7 +21,7 @@ const useFetch = (url) => {
 		};
 
 		fetchData();
-	}, [url]);
+	}, [url]); // if we dont want the values to change on click then we can remove this
 
 	const reFetch = async () => {
 		setLoading(true);

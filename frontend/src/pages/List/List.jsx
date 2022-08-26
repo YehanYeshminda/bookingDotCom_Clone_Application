@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import SearchItem from '../../components/SearchItem';
+import useFetch from '../../hooks/useFetch';
 
 const List = () => {
 	const location = useLocation();
@@ -13,6 +14,19 @@ const List = () => {
 	const [date, setdate] = useState(location.state.date);
 	const [openDate, setOpenDate] = useState(false);
 	const [options, setoptions] = useState(location.state.options);
+
+	const [min, setMin] = useState(undefined);
+	const [max, setMax] = useState(undefined);
+
+	const url = `http://localhost:5000/api/hotels?city=${destination}&min=${
+		min || 0
+	}&max=${max || 999}`;
+
+	const { data, loading, error, reFetch } = useFetch(url);
+
+	const handleClick = () => {
+		reFetch();
+	};
 
 	return (
 		<div>
@@ -59,13 +73,21 @@ const List = () => {
 									<span className="lsOptionText">
 										Min price <small>per night</small>
 									</span>
-									<input type="number" className="w-12" />
+									<input
+										type="number"
+										onChange={(e) => setMin(e.target.value)}
+										className="w-12"
+									/>
 								</div>
 								<div className="flex justify-between mb-2.5 text-gray-600 text-sm">
 									<span className="lsOptionText">
 										Max price <small>per night</small>
 									</span>
-									<input type="number" className="w-12" />
+									<input
+										type="number"
+										onChange={(e) => setMax(e.target.value)}
+										className="w-12"
+									/>
 								</div>
 								<div className="flex justify-between mb-2.5 text-gray-600 text-sm">
 									<span className="lsOptionText">Adult</span>
@@ -96,19 +118,23 @@ const List = () => {
 								</div>
 							</div>
 						</div>
-						<button className="p-2.5 bg-blue-600 text-white border-none w-full font-semibold cursor-pointer">
+						<button
+							onClick={handleClick}
+							className="p-2.5 bg-blue-600 text-white border-none w-full font-semibold cursor-pointer"
+						>
 							Search
 						</button>
 					</div>
 					<div className="flex-[3]">
-						<SearchItem />
-						<SearchItem />
-						<SearchItem />
-						<SearchItem />
-						<SearchItem />
-						<SearchItem />
-						<SearchItem />
-						<SearchItem />
+						{loading
+							? 'Loading please wait...'
+							: data.map((item) => {
+									return (
+										<>
+											<SearchItem data={item} key={item._id} />
+										</>
+									);
+							  })}
 					</div>
 				</div>
 			</div>
