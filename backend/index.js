@@ -6,8 +6,11 @@ import hotelRouter from './routes/hotel-routes.js';
 import roomRouter from './routes/room-routes.js';
 import userRouter from './routes/user-routes.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
 
 dotenv.config();
 
@@ -25,8 +28,8 @@ mongoose.connection.on('disconnected', () => {
 });
 
 // middlewares for the files to function
-app.use(cookieParser()); // used to pass cookies with rhe use of jwt
 app.use(express.json());
+app.use(cookieParser()); // used to pass cookies with rhe use of jwt
 
 // when ever we use this end point this will then use this end point
 app.use('/api/auth', authRouter); // http://localhost:5000/api/auth - this is the default path to all the routes in the authRouter

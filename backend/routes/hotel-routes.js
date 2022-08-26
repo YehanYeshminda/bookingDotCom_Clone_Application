@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+	countByCity,
 	createHotel,
 	deleteHotels,
 	getAllHotels,
@@ -20,9 +21,13 @@ hotelRouter.put('/:id', verifyCheckAdmin, updateHotel);
 hotelRouter.delete('/:id', verifyCheckAdmin, deleteHotels);
 
 // get a specific hotel request to existing hotels
-hotelRouter.get('/:id', getUniqueHotel);
+hotelRouter.get('/find/:id', getUniqueHotel);
 
 // getting all hotel from the existing hotels
 hotelRouter.get('/', getAllHotels);
+
+hotelRouter.get('/countByCity', countByCity); // used to count the total number of cities
+
+hotelRouter.get('/countByType', getAllHotels); // used to count the total number of type of cities
 
 export default hotelRouter;
