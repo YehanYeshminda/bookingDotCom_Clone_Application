@@ -10,8 +10,6 @@ import cors from 'cors';
 
 const app = express();
 
-app.use(cors());
-
 dotenv.config();
 
 const connectDb = async () => {
@@ -28,8 +26,9 @@ mongoose.connection.on('disconnected', () => {
 });
 
 // middlewares for the files to function
-app.use(express.json());
+app.use(cors()); // used to do crud operations with mongodb
 app.use(cookieParser()); // used to pass cookies with rhe use of jwt
+app.use(express.json());
 
 // when ever we use this end point this will then use this end point
 app.use('/api/auth', authRouter); // http://localhost:5000/api/auth - this is the default path to all the routes in the authRouter
