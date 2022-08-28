@@ -6,8 +6,6 @@ const PropertyList = () => {
 
 	const { data, loading, error } = useFetch(url);
 
-	console.log(data);
-
 	return (
 		<div className="w-full max-w-5xl flex justify-between gap-5">
 			{loading ? (

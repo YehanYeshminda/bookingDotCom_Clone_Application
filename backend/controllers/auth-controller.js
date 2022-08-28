@@ -44,10 +44,9 @@ export const loginAuth = async (req, res, next) => {
 
 		// if password is correct then we create new token using jwt
 		const token = jwt.sign(
-			{ id: user._id, isAdmin: user.isAdmin },
+			{ _id: user._id, isAdmin: user.isAdmin },
 			process.env.JWT_SECRET_KEY
 		);
-
 		// filtering some values which the users can see
 		const { password, isAdmin, ...otherData } = user._doc;
 
