@@ -7,13 +7,9 @@ import { AuthenticationContextProvider } from './context/AuthenticationContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<React.StrictMode>
-		{/* authentication context */}
-		<AuthenticationContextProvider>
-			{/*search context save  */}
-			<SearchContextProvider>
-				<App />
-			</SearchContextProvider>
-		</AuthenticationContextProvider>
-	</React.StrictMode>
+	<AuthenticationContextProvider>
+		<SearchContextProvider>
+			<App />
+		</SearchContextProvider>
+	</AuthenticationContextProvider>
 );

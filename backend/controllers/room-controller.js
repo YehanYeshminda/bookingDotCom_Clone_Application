@@ -87,3 +87,19 @@ export const getAllRooms = async (req, res, next) => {
 		next(error);
 	}
 };
+
+// make sure that the route is correct for this must be inside of the object which we are searching for with the id of it
+export const getMultipleRoomsPerIdList = async (req, res, next) => {
+	try {
+		const allHotelPhotos = await Hotel.findById(req.params.id);
+		const list = await Promise.all(
+			allHotelPhotos.rooms.map((room) => {
+				return Room.findById(room);
+			})
+		);
+
+		res.status(200).json(list);
+	} catch (error) {
+		res.status(400).json({ message: 'unable to find room' });
+	}
+};

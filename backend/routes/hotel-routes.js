@@ -8,6 +8,7 @@ import {
 	getUniqueHotel,
 	updateHotel,
 } from '../controllers/hotel-controller.js';
+import { getMultipleRoomsPerIdList } from '../controllers/room-controller.js';
 import { verifyCheckAdmin } from '../utils/verifyToken.js';
 
 const hotelRouter = express.Router();
@@ -23,6 +24,9 @@ hotelRouter.delete('/:id', verifyCheckAdmin, deleteHotels);
 
 // get a specific hotel request to existing hotels
 hotelRouter.get('/find/:id', getUniqueHotel);
+
+// getting all the rooms inside of a hotel
+hotelRouter.get('/rooms/:id', getMultipleRoomsPerIdList);
 
 // getting all hotel from the existing hotels
 hotelRouter.get('/', getAllHotels);

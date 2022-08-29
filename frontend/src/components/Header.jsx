@@ -18,6 +18,7 @@ import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
+import { AuthenticationContext } from '../context/AuthenticationContext';
 
 const Header = ({ type }) => {
 	const [openDate, setOpenDate] = useState(false);
@@ -30,6 +31,9 @@ const Header = ({ type }) => {
 			key: 'selection',
 		},
 	]);
+
+	// getting the user info if the user is set in the local db
+	const { userInfo } = useContext(AuthenticationContext);
 
 	const [openOptions, setOpenOptions] = useState(false);
 	const navigate = useNavigate();
@@ -99,9 +103,11 @@ const Header = ({ type }) => {
 							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt,
 							delectus!
 						</p>
-						<button className="bg-blue-500 text-white font-semibold border-none p-2.5 cursor-pointer">
-							Sign in/ Register
-						</button>
+						{!userInfo && (
+							<button className="bg-blue-500 text-white font-semibold border-none p-2.5 cursor-pointer">
+								Sign in/ Register
+							</button>
+						)}
 						<div className="h-12 bg-white border-yellow-400 border-2 flex items-center justify-around px-0 py-5 rounded-2 absolute bottom-6 w-full max-w-5xl rounded-lg">
 							<div className="flex items-center gap-[10px] ">
 								<FontAwesomeIcon icon={faBed} className="text-gray-400" />

@@ -12,18 +12,20 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import useFetch from '../../hooks/useFetch';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { SearchContext } from '../../context/SearchContext';
+import { AuthenticationContext } from '../../context/AuthenticationContext';
+import LoginModel from '../../components/LoginModel';
 
 const SingleHotels = () => {
 	const location = useLocation();
+	const navigate = useNavigate();
 	const id = location.pathname.split('/')[2];
-
-	console.log(id);
 
 	const [slideNumber, setSlideNumber] = useState(0);
 	const [open, setOpen] = useState(false);
+	const [openModel, setOpenModel] = useState(false);
 
 	const url = `http://localhost:5000/api/hotels/find/${id}`;
 
@@ -32,7 +34,6 @@ const SingleHotels = () => {
 	// getting the sent in state using the context API
 	const { date, options } = useContext(SearchContext);
 
-	console.log(options);
 	// calculating the difference between days
 	const MILISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 	const calcDayDifference = (date1, date2) => {
@@ -59,6 +60,17 @@ const SingleHotels = () => {
 		}
 
 		setSlideNumber(newSlideNumber);
+	};
+
+	// getting the user info if the user is set in the local db
+	const { userInfo } = useContext(AuthenticationContext);
+
+	const handleClick = () => {
+		if (userInfo) {
+			setOpenModel(true);
+		} else {
+			navigate('/login');
+		}
 	};
 
 	return (
@@ -97,6 +109,7 @@ const SingleHotels = () => {
 					)}
 					<div className="w-full max-w-5xl flex flex-col gap-2.5 relative">
 						<button
+							onClick={handleClick}
 							className="absolute top-2.5 right-0 pr-2.5 pl-2.5 pt-2.5 pb-2.5 bg-blue-600 text-white font-semibold rounded-xs border-none cursor-pointer"
 							type="button"
 						>
@@ -145,6 +158,7 @@ const SingleHotels = () => {
 									({totalDaysOfStay} nights)
 								</h2>
 								<button
+									onClick={handleClick}
 									type="button"
 									className="top-2.5 right-0 pr-2.5 pl-2.5 pt-2.5 pb-2.5 bg-blue-600 text-white font-semibold rounded-xs border-none cursor-pointer"
 								>
@@ -157,6 +171,8 @@ const SingleHotels = () => {
 					<Footer />
 				</div>
 			)}
+
+			{openModel && <LoginModel setModelGet={setOpenModel} hotelId={id} />}
 		</div>
 	);
 };

@@ -3,6 +3,7 @@ import {
 	createRoom,
 	deleteRooms,
 	getAllRooms,
+	getMultipleRoomsPerIdList,
 	getUniqueRoom,
 	updateRoom,
 } from '../controllers/room-controller.js';

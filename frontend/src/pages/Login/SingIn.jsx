@@ -14,9 +14,7 @@ const SingIn = () => {
 	const navigate = useNavigate();
 
 	// using the state context to set the user and get the user
-	const { userInfo, loading, error, dispatch } = useContext(
-		AuthenticationContext
-	);
+	const { loading, error, dispatch } = useContext(AuthenticationContext);
 
 	// getting the changes in using the id and the value depending on the id name
 	const handleChange = (e) => {
@@ -43,8 +41,6 @@ const SingIn = () => {
 			dispatch({ type: 'LOGIN_FAIL', payload: error.response.data });
 		}
 	};
-
-	console.log(userInfo);
 
 	return (
 		<div className="h-[100vh] flex justify-center items-center">
