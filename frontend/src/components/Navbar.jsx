@@ -11,9 +11,11 @@ const Navbar = () => {
 					<button className="ml-5 border border-none py-1.5 px-2.5 cursor-pointer text-blue-700 bg-white font-semibold">
 						Register
 					</button>
-					<button className="ml-5 border border-none py-1.5 px-2.5 cursor-pointer text-blue-700 bg-white font-semibold">
-						Login
-					</button>
+					<Link to="/login">
+						<button className="ml-5 border border-none py-1.5 px-2.5 cursor-pointer text-blue-700 bg-white font-semibold">
+							Login
+						</button>
+					</Link>
 				</div>
 			</div>
 		</div>
