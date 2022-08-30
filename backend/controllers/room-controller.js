@@ -103,3 +103,21 @@ export const getMultipleRoomsPerIdList = async (req, res, next) => {
 		res.status(400).json({ message: 'unable to find room' });
 	}
 };
+
+// update a rooms when clicked to reserve
+export const updateReserveRoomsAvailability = async (req, res, next) => {
+	try {
+		await Room.updateOne(
+			{ 'roomNumber._id': req.params.id },
+			{
+				$push: {
+					'roomNumber.$.unavailableDates': req.body.dates,
+				},
+			}
+		);
+
+		res.status(200).json({ message: 'Updated the room avalability dates' });
+	} catch (error) {
+		next(error);
+	}
+};

@@ -5,6 +5,7 @@ import {
 	deleteRooms,
 	getAllRooms,
 	getUniqueRoom,
+	updateReserveRoomsAvailability,
 	updateRoom,
 } from '../controllers/room-controller.js';
 import { verifyCheckAdmin } from '../utils/verifyToken.js';
@@ -21,8 +22,8 @@ roomRouter.put('/:id', verifyCheckAdmin, updateRoom);
 // room id and then hotel id to delete a room
 roomRouter.delete('/:id/:hotelId', verifyCheckAdmin, deleteRooms);
 
-// update the availability of the roomd
-roomRouter.delete('/:id/:hotelId', verifyCheckAdmin, deleteRooms);
+// update the availability of the room depending on the id
+roomRouter.put('/availability/:id', updateReserveRoomsAvailability);
 
 // get a specific hotel request to existing hotels
 roomRouter.get('/:id', getUniqueRoom);

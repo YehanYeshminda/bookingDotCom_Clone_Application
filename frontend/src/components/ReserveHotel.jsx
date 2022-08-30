@@ -4,12 +4,14 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { SearchContext } from '../context/SearchContext';
 import useFetch from '../hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
 
 const ReserveHotel = ({ setOpen, hotelId }) => {
 	const [selectRoom, setSelectRoom] = useState([]);
+	const navigate = useNavigate();
 
 	const { date } = useContext(SearchContext);
-	console.log(date);
+
 	const url = `http://localhost:5000/api/hotels/rooms/${hotelId}`;
 
 	const { data, loading, error } = useFetch(url);
@@ -56,8 +58,14 @@ const ReserveHotel = ({ setOpen, hotelId }) => {
 		try {
 			await Promise.all(
 				selectRoom.map((roomId) => {
-					const res = axios.put();
-				})
+					const res = axios.put(
+						`http://localhost:5000/api/rooms/availability/${roomId}`,
+						{ dates: allDatesGet }
+					);
+					return res.data;
+				}),
+				setOpen(false),
+				navigate('/')
 			);
 		} catch (error) {}
 	};
