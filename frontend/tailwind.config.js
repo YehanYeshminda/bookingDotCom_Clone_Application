@@ -20,7 +20,7 @@ module.exports = {
 				h1: '2rem',
 			},
 			backgroundColor: {
-				trasparentBlack: 'rgba(0, 0, 0, 0.613)',
+				trasparentBlack: 'rgba(0, 0, 0, 0.413)',
 			},
 		},
 	},

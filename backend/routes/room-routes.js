@@ -1,9 +1,9 @@
 import express from 'express';
+import { getAllRoomsPerHotel } from '../controllers/hotel-controller.js';
 import {
 	createRoom,
 	deleteRooms,
 	getAllRooms,
-	getMultipleRoomsPerIdList,
 	getUniqueRoom,
 	updateRoom,
 } from '../controllers/room-controller.js';
@@ -21,10 +21,16 @@ roomRouter.put('/:id', verifyCheckAdmin, updateRoom);
 // room id and then hotel id to delete a room
 roomRouter.delete('/:id/:hotelId', verifyCheckAdmin, deleteRooms);
 
+// update the availability of the roomd
+roomRouter.delete('/:id/:hotelId', verifyCheckAdmin, deleteRooms);
+
 // get a specific hotel request to existing hotels
 roomRouter.get('/:id', getUniqueRoom);
 
 // getting all hotel from the existing hotels
 roomRouter.get('/', getAllRooms);
+
+// getting all rooms for the existing hotel
+roomRouter.get('/room/:hotelid', getAllRoomsPerHotel);
 
 export default roomRouter;

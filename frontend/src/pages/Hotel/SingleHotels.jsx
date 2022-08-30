@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 import MailList from '../../components/MailList';
@@ -16,16 +16,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { SearchContext } from '../../context/SearchContext';
 import { AuthenticationContext } from '../../context/AuthenticationContext';
-import LoginModel from '../../components/LoginModel';
+import ReserveHotel from '../../components/ReserveHotel';
 
 const SingleHotels = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const id = location.pathname.split('/')[2];
 
+	const [openModel, setOpenModel] = useState(false);
 	const [slideNumber, setSlideNumber] = useState(0);
 	const [open, setOpen] = useState(false);
-	const [openModel, setOpenModel] = useState(false);
 
 	const url = `http://localhost:5000/api/hotels/find/${id}`;
 
@@ -172,7 +172,7 @@ const SingleHotels = () => {
 				</div>
 			)}
 
-			{openModel && <LoginModel setModelGet={setOpenModel} hotelId={id} />}
+			{openModel && <ReserveHotel setOpen={setOpenModel} hotelId={id} />}
 		</div>
 	);
 };
